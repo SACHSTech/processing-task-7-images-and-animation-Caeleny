@@ -62,15 +62,15 @@ public class Sketch extends PApplet {
     fill(0,255,255);
     ellipse(circlex, circley, 25, 25);
 
+    // Set the speed of the rotation
+    angle += 0.05;
+
     // Set up the rotating ball
     float x = width/2 + cos(angle) * radius;
     float y = height/2 + sin(angle) * radius;
 
     // Print the basketball
     image(fltbball,x,y);
-
-    // Set the speed of the rotation
-    angle += 0.05;
 
   }
   }
