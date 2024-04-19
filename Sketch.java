@@ -1,36 +1,78 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class Sketch extends PApplet {
+
+  // Initiate the images 
+  PImage imgBackground;
+  PImage fltbball;
+
+  // Set up the variables for the background image
+  float fltBackgroundX = 0;
+  float fltBackgroundY = 0;
+
+  // Set up the variable for circle
+  float circlex = 150;
+  float circley = 100;
+  float xSpeed = 5;
+  float ySpeed = 4;
+
+  // Set up the variables for the spinning basketball
+  float angle = 0;
+  float radius = 100;
 	
-	
-  /**
-   * Called once at the beginning of execution, put your size all in this method
-   */
   public void settings() {
-	// put your size call here
+	
+    // Set up the size of the background
     size(400, 400);
   }
 
-  /** 
-   * Called once at the beginning of execution.  Add initial set up
-   * values here i.e background, stroke, fill etc.
-   */
   public void setup() {
-    background(210, 255, 173);
+
+    // Set up the background image and it's size
+    imgBackground = loadImage("4ccc.jpg");
+    imgBackground.resize(imgBackground.width/8, imgBackground.height/6);
+
+    // Set up the basketball image and it's size
+    fltbball = loadImage("basketball.png");
+    fltbball.resize(fltbball.width/8, fltbball.height/8);
+  
   }
 
-  /**
-   * Called repeatedly, anything drawn to the screen goes here
-   */
   public void draw() {
-	  
-	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
 
-    stroke(255);
-    line(50, 125, 70, 50);  
+    // Print the background
+    image(imgBackground,fltBackgroundX,fltBackgroundY);  
+
+    // Set up the speed and collision of the circle
+    circlex += xSpeed;
+    circley += ySpeed;
+  
+    if (circlex < 0 || circlex > width) {
+    xSpeed *= -1;
+
+    }
+
+    if (circley < 0  || circley > height) {
+    ySpeed *= -1;
+
+    }
+
+    // Draw the bouncing circle
+    fill(0,255,255);
+    ellipse(circlex, circley, 25, 25);
+
+    // Set up the rotating ball
+    float x = width/2 + cos(angle) * radius;
+    float y = height/2 + sin(angle) * radius;
+
+    // Print the basketball
+    image(fltbball,x,y);
+
+    // Set the speed of the rotation
+    angle += 0.05;
+
+  }
   }
   
-  // define other methods down here.
-}
+  
